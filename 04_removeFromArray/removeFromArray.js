@@ -1,9 +1,25 @@
-const removeFromArray = function(array, item) {
-    
-    array.splice((item - 1), 1);
+const removeFromArray = function(array,...items) {
+
+    const arrayCopy = array;
+    const l = arrayCopy.length;
+    let i = items.length;
+    innerLoop: for (item of items) {
+      let z = l - i;
+      if (typeof item !== `number`) {
+          continue innerLoop;
+      }
+      if (array[item - 1] === arrayCopy[item - 1]) {
+        array.splice((item - 1), 1);
+      } else {
+        array.splice((item - 1 - z), 1);
+      }
+      i--;
+    }
     return array;
 
-};
+}
+    
+   
 
 // Do not edit below this line
 module.exports = removeFromArray;
